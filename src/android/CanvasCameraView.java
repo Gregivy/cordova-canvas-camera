@@ -84,7 +84,7 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.canvascamera);
+        setContentView(getResources().getIdentifier("canvascamera", "layout", getPackageName()));
 
         _quality = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(CanvasCamera.QUALITY , 85);
         _destType = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(CanvasCamera.DESTTYPE , DestinationTypeFileURI);
@@ -129,15 +129,15 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
     }
 
     @SuppressWarnings("deprecation")
-	private void getControlVariables()
+    private void getControlVariables()
     {
-        m_imgFlash = (ImageView) findViewById(R.id.imgFlash);
+        m_imgFlash = (ImageView) findViewById(getResources().getIdentifier("imgFlash", "id", getPackageName()));
 
-        m_imgRevert = (ImageView) findViewById(R.id.imgRevert);
-        m_imgCapture = (ImageView) findViewById(R.id.imgCapture);
-        m_imgClose = (ImageView) findViewById(R.id.imgClose);
+        m_imgRevert = (ImageView) findViewById(getResources().getIdentifier("imgRevert", "id", getPackageName()));
+        m_imgCapture = (ImageView) findViewById(getResources().getIdentifier("imgCapture", "id", getPackageName()));
+        m_imgClose = (ImageView) findViewById(getResources().getIdentifier("imgClose", "id", getPackageName()));
 
-        m_surfaceview = (SurfaceView) findViewById(R.id.surfaceView);
+        m_surfaceview = (SurfaceView) findViewById(getResources().getIdentifier("surfaceView", "id", getPackageName()));
         m_surfaceHolder = m_surfaceview.getHolder();
         m_surfaceHolder.addCallback(this);
         m_surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -148,14 +148,14 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
     private void initializeUI()
     {
         if (bFlash)
-            m_imgFlash.setImageResource(R.drawable.video_sprites_focus_inactive);
+            m_imgFlash.setImageResource(getResources().getIdentifier("video_sprites_focus_inactive", "drawable", getPackageName()));
         else
-            m_imgFlash.setImageResource(R.drawable.video_sprites_focus);
+            m_imgFlash.setImageResource(getResources().getIdentifier("video_sprites_focus", "drawable", getPackageName()));
 
         if (bRevert)
-            m_imgRevert.setImageResource(R.drawable.video_sprites_revert);
+            m_imgRevert.setImageResource(getResources().getIdentifier("video_sprites_revert", "drawable", getPackageName()));
         else
-            m_imgRevert.setImageResource(R.drawable.video_sprites_revert_inactive);
+            m_imgRevert.setImageResource(getResources().getIdentifier("video_sprites_revert_inactive", "drawable", getPackageName()));
 
         m_imgFlash.setOnClickListener(flashClickListener);
 
@@ -178,14 +178,14 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
             if (bFlash)
             {
                 p.setFlashMode(Parameters.FLASH_MODE_OFF);
-                m_imgFlash.setImageResource(R.drawable.video_sprites_focus);
+                m_imgFlash.setImageResource(getResources().getIdentifier("video_sprites_focus", "drawable", getPackageName()));
 
                 editor.putBoolean(CanvasCamera.FLASH, false);
             }
             else
             {
                 p.setFlashMode(Parameters.FLASH_MODE_TORCH);
-                m_imgFlash.setImageResource(R.drawable.video_sprites_focus_inactive);
+                m_imgFlash.setImageResource(getResources().getIdentifier("video_sprites_focus_inactive","drawable", getPackageName()));
 
                 editor.putBoolean(CanvasCamera.FLASH, true);
             }
@@ -215,10 +215,10 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
             {
                 m_camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
 
-                m_imgRevert.setImageResource(R.drawable.video_sprites_revert_inactive);
+                m_imgRevert.setImageResource(getResources().getIdentifier("video_sprites_revert_inactive", "drawable", getPackageName()));
                 editor.putBoolean(CanvasCamera.REVERT, false);
 
-                m_imgFlash.setImageResource(R.drawable.video_sprites_focus);
+                m_imgFlash.setImageResource(getResources().getIdentifier("video_sprites_focus", "drawable", getPackageName()));
                 bFlash = false;
                 editor.putBoolean(CanvasCamera.FLASH, false);
             }
@@ -226,7 +226,7 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
             {
                 m_camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
 
-                m_imgRevert.setImageResource(R.drawable.video_sprites_revert);
+                m_imgRevert.setImageResource(getResources().getIdentifier("video_sprites_revert", "drawable", getPackageName()));
 
                 editor.putBoolean(CanvasCamera.REVERT, true);
             }
@@ -265,7 +265,7 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
     }
 
     @SuppressLint("SimpleDateFormat")
-	private String writeTakedImageDataToStorage(byte[] data) {
+    private String writeTakedImageDataToStorage(byte[] data) {
         File sdDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File pictureFileDir = new File(sdDir, "CameraAPIDemo");
 
@@ -426,12 +426,12 @@ public class CanvasCameraView extends Activity implements SurfaceHolder.Callback
             if (bRevert)
             {
                 m_camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
-                m_imgRevert.setImageResource(R.drawable.video_sprites_revert);
+                m_imgRevert.setImageResource(getResources().getIdentifier("video_sprites_revert", "drawable", getPackageName()));
             }
             else
             {
                 m_camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-                m_imgRevert.setImageResource(R.drawable.video_sprites_revert_inactive);
+                m_imgRevert.setImageResource(getResources().getIdentifier("video_sprites_revert_inactive", "drawable", getPackageName()));
             }
 
             try
